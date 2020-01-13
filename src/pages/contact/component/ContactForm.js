@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
+import Redirect from 'react-router-dom/Redirect';
 
 class ContactForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isRedirect: false
+        }
+    }
+    
+    onHandleContactMe = (event) => {
+        // submit form without reload page
+        event.preventDefault(); 
+        this.setState({
+            isRedirect: true
+        })       
+    }
+
     render() {
+        if(this.state.isRedirect) {
+            return <Redirect to="/" />
+        }
         return (
             <>
                 <section className="page-section" id="contact">
@@ -44,7 +63,9 @@ class ContactForm extends Component {
                             <br />
                             <div id="success" />
                             <div className="form-group">
-                            <button type="submit" className="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
+                                <button type="button" className="btn btn-primary btn-xl" onClick={(e) => this.onHandleContactMe(e)}>
+                                    Send
+                                </button>
                             </div>
                         </form>
                         </div>
