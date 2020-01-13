@@ -1,0 +1,18 @@
+.btn-primary:not(:disabled):not(.disabled).active, 
+.btn-primary:not(:disabled):not(.disabled):active, 
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #148f77;
+    border-color: #12846e;
+}
+
+.btn-xl {
+    padding: 1rem 1.75rem;
+    font-size: 1.25rem;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1abc9c;
+    border-color: #1abc9c;
+}
