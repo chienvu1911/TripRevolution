@@ -5,10 +5,26 @@ class ContactForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isRedirect: false
+            isRedirect: false,
+            contactData: {
+                name: '',
+                email: ''
+            }
         }
     }
     
+    handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        let { contactData } = this.state;
+        contactData[name] = value;
+        
+        this.setState({
+            contactData
+        });
+    }
+
     onHandleContactMe = (event) => {
         // submit form without reload page
         event.preventDefault(); 
@@ -35,14 +51,16 @@ class ContactForm extends Component {
                             <div className="control-group">
                             <div className="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Name</label>
-                                <input className="form-control" id="name" type="text" placeholder="Name" required="required" data-validation-required-message="Please enter your name." />
+                                <input className="form-control" id="name" type="text" placeholder="Name" required="required" name="name" 
+                                       data-validation-required-message="Please enter your name."
+                                       onChange={this.handleInputChange} />
                                 <p className="help-block text-danger" />
                             </div>
                             </div>
                             <div className="control-group">
                             <div className="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Email Address</label>
-                                <input className="form-control" id="email" type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address." />
+                                <input onChange={this.handleInputChange} className="form-control" id="email" type="email" name="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address." />
                                 <p className="help-block text-danger" />
                             </div>
                             </div>
