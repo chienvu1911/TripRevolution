@@ -1,6 +1,8 @@
 import React, { Component } from "react"; 
 import Navigation from './components/shared/Navigation';
 import Header from './components/shared/Header';
+import Footer from './components/shared/Footer';
+import ContactForm from './components/ContactForm';
 
 class App extends Component {
     constructor(props) {
@@ -12,6 +14,8 @@ class App extends Component {
             <div>  
                 <Navigation />
                 <Header />
+                <ContactForm />
+                <Footer />
             </div>  
         );  
     }  
