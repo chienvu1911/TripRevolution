@@ -6,7 +6,8 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve('dist'),
-        filename: 'main.js'
+        filename: 'main.js',
+        publicPath: '/'
     },
     // define babel loader
     module: {
@@ -25,6 +26,9 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'sass-loader']    
            }                        
         ]
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     plugins: [  
         new HtmlWebpackPlugin({  

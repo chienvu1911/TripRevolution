@@ -1,8 +1,8 @@
-import React, { Component } from "react"; 
-import Navigation from './components/shared/Navigation';
-import Header from './components/shared/Header';
-import Footer from './components/shared/Footer';
-import ContactForm from './components/ContactForm';
+import React, { Component } from "react";
+import Navigation from './components/layout/Navigation';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import Routes from './routes/Routes'; 
 
 class App extends Component {
     constructor(props) {
@@ -11,12 +11,12 @@ class App extends Component {
 
     render() {        
         return (  
-            <div>  
-                <Navigation />
-                <Header />
-                <ContactForm />
-                <Footer />
-            </div>  
+            <>
+              <Navigation />
+              <Header /> 
+              <Routes />  
+              <Footer />
+            </>  
         );  
     }  
 }  
