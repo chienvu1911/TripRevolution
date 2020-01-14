@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
 import { faSearch, faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import listUser from '../../data/list-user.json';  
+const uuidv1 = require('uuid/v1');
 
 class ListUsersPage extends Component {
     constructor(props) {
@@ -37,13 +38,21 @@ class ListUsersPage extends Component {
 
     onHandleAddNewUser = () => {
         let { newUser, listData } = this.state;
-        newUser.id = listData.length + 1;
+        newUser.id = uuidv1();
         listData.unshift(newUser);
-        this.setState({ listData })
+        this.setState({ 
+            listData, 
+            newUser: {
+                name: '',
+                phone: '',
+                role: ''
+            }
+        })
     }
 
     render() {
         let { search, listData, newUser } = this.state;
+
         let listDataRender = listData.filter(data => data.name.includes(search));
 
         return (
@@ -93,11 +102,11 @@ class ListUsersPage extends Component {
                 </div> 
                 <div>
                     <div className="form-group">
-                        <input type="text" name="name" value={newUser.email} className="form-control" 
+                        <input type="text" name="name" value={newUser.name} className="form-control" 
                                placeholder="Enter name" onChange={this.onHandleChangeInput}/>
                     </div>
                     <div className="form-group">
-                        <input type="text" value={newUser.password} name="phone" className="form-control" onChange={this.onHandleChangeInput} placeholder="Phone" />
+                        <input type="text" value={newUser.phone} name="phone" className="form-control" onChange={this.onHandleChangeInput} placeholder="Phone" />
                     </div>
 
                     <select className="custom-select mb-2" id="inlineFormCustomSelect" name="role" onChange={this.onHandleChangeInput} value={newUser.role}>
