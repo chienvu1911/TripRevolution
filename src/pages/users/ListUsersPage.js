@@ -4,12 +4,29 @@ import { faSearch, faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-ic
 import listUser from '../../data/list-user.json';  
 
 class ListUsersPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            search: '',
+            listData: listUser
+        }
+    }
+    
+    onHandleChangeKeywordSearch = (event) => {
+        this.setState({
+            search: event.target.value
+        })
+    }
+
     render() {
+        let { search, listData } = this.state;
+        let listDataRender = listData.filter(data => data.name.includes(search));
+
         return (
             <>
                <div className="form-group has-search mt-4">
                     <FontAwesomeIcon icon={faSearch} className="form-control-feedback" />
-                    <input type="text" className="form-control" placeholder="Search" />
+                    <input type="text" className="form-control" placeholder="Search" value={search} onChange={this.onHandleChangeKeywordSearch}/>
                 </div>
 
                 <div className="row">
@@ -26,8 +43,8 @@ class ListUsersPage extends Component {
                             </thead>
                             <tbody>
                             {
-                                listUser.map((user, index) => (
-                                    <tr>
+                                listDataRender.map((user, index) => (
+                                    <tr key={index}>
                                         <th>{user.id}</th>
                                         <td>{user.name}</td>
                                         <td>{user.phone}</td>
