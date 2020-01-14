@@ -8,7 +8,12 @@ class ListUsersPage extends Component {
         super(props);
         this.state = {
             search: '',
-            listData: listUser
+            listData: listUser,
+            newUser: {
+                name: "",
+                phone: "",
+                role: ""
+            }
         }
     }
     
@@ -18,8 +23,27 @@ class ListUsersPage extends Component {
         })
     }
 
+    onHandleChangeInput = (event) => {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        let { newUser } = this.state;
+        newUser[name] = value;
+
+        this.setState({
+            newUser
+        })
+    }
+
+    onHandleAddNewUser = () => {
+        let { newUser, listData } = this.state;
+        newUser.id = listData.length + 1;
+        listData.unshift(newUser);
+        this.setState({ listData })
+    }
+
     render() {
-        let { search, listData } = this.state;
+        let { search, listData, newUser } = this.state;
         let listDataRender = listData.filter(data => data.name.includes(search));
 
         return (
@@ -67,22 +91,23 @@ class ListUsersPage extends Component {
                         </table>
                     </div>
                 </div> 
-                <form>
+                <div>
                     <div className="form-group">
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                        <input type="text" name="name" value={newUser.email} className="form-control" 
+                               placeholder="Enter name" onChange={this.onHandleChangeInput}/>
                     </div>
                     <div className="form-group">
-                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                        <input type="text" value={newUser.password} name="phone" className="form-control" onChange={this.onHandleChangeInput} placeholder="Phone" />
                     </div>
 
-                    <select className="custom-select mb-2" id="inlineFormCustomSelect">
-                        <option defaultValue>Choose...</option>
-                        <option value={1}>One</option>
-                        <option value={2}>Two</option>
-                        <option value={3}>Three</option>
+                    <select className="custom-select mb-2" id="inlineFormCustomSelect" name="role" onChange={this.onHandleChangeInput} value={newUser.role}>
+                        <option defaultValue>Choose role...</option>
+                        <option value={1}>Admin</option>
+                        <option value={2}>SubAdmin</option>
+                        <option value={3}>Manager</option>
                     </select>
-                    <button type="submit" className="btn btn-primary mb-4">Add new user</button>
-                </form>
+                    <button type="submit" className="btn btn-primary mb-4" onClick={this.onHandleAddNewUser}>Add new user</button>
+                </div>
             </>
         );
     }
