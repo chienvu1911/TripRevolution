@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Redirect from 'react-router-dom/Redirect';
+import { Redirect } from 'react-router-dom';
 
 class ContactForm extends Component {
     constructor(props) {
