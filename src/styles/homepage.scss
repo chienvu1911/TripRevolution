@@ -1,3 +1,19 @@
+// @import 'code';
+$base-color: #c6538c;
+$border-dark: rgba($base-color, 0.88);
+$bd: border;
+
 .home-page {
     display: block;
+
+    p {
+        text-align: left;
+        #{$bd}: {
+            top: 1px solid black;
+        }
+
+        &:hover {
+            color: blue;
+        }
+    }
 }
